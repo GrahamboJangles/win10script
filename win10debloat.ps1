@@ -575,31 +575,31 @@ $essentialtweaks.Add_Click({
     Write-Host "Stopping and disabling WAP Push Service..."
 	Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
 	Set-Service "dmwappushservice" -StartupType Disabled
-    Write-Host "Enabling F8 boot menu options..."
-	bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
-    Write-Host "Stopping and disabling Home Groups services..."
-	Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
-	Set-Service "HomeGroupListener" -StartupType Disabled
-	Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
-	Set-Service "HomeGroupProvider" -StartupType Disabled
-    Write-Host "Disabling Shared Experiences..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 0
+    #Write-Host "Enabling F8 boot menu options..."
+	#bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
+    #Write-Host "Stopping and disabling Home Groups services..."
+	#Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
+	#Set-Service "HomeGroupListener" -StartupType Disabled
+	#Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
+	#Set-Service "HomeGroupProvider" -StartupType Disabled
+    #Write-Host "Disabling Shared Experiences..."
+	#Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 0
+	#Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 0
     Write-Host "Disabling Remote Assistance..."
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
-    Write-Host "Disabling Storage Sense..."
-	Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
-    Write-Host "Stopping and disabling Superfetch service..."
-	Stop-Service "SysMain" -WarningAction SilentlyContinue
-	Set-Service "SysMain" -StartupType Disabled
-    Write-Host "Setting BIOS time to UTC..."
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
-    Write-Host "Disabling Hibernation..."
+    #Write-Host "Disabling Storage Sense..."
+	#Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
+    #Write-Host "Stopping and disabling Superfetch service..."
+	#Stop-Service "SysMain" -WarningAction SilentlyContinue
+	#Set-Service "SysMain" -StartupType Disabled
+    #Write-Host "Setting BIOS time to UTC..."
+	#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
+    <#Write-Host "Disabling Hibernation..."
 	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 0
 	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
 		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
 	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0
+	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0#>
     Write-Host "Showing task manager details..."
 	$taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru
 	Do {
@@ -614,8 +614,8 @@ $essentialtweaks.Add_Click({
 		New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
 	}
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 1
-    Write-Host "Hiding Task View button..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
+    #Write-Host "Hiding Task View button..."
+	#Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
     Write-Host "Hiding People icon..."
 	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
 		New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
@@ -634,10 +634,10 @@ $essentialtweaks.Add_Click({
 		$wsh.SendKeys('{NUMLOCK}')
 	}
 
-    Write-Host "Changing default Explorer view to This PC..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
-    Write-Host "Hiding 3D Objects icon from This PC..."
-	Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
+    #Write-Host "Changing default Explorer view to This PC..."
+	#Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
+    #Write-Host "Hiding 3D Objects icon from This PC..."
+	#Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
 
 $Bloatware = @(
 
@@ -651,25 +651,25 @@ $Bloatware = @(
 	    "Microsoft.BingWeather"
         "Microsoft.GetHelp"
         "Microsoft.Getstarted"
-        "Microsoft.Messaging"
+        #"Microsoft.Messaging"
         "Microsoft.Microsoft3DViewer"
         "Microsoft.MicrosoftSolitaireCollection"
         "Microsoft.NetworkSpeedTest"
-        "Microsoft.News"
+        #"Microsoft.News"
         "Microsoft.Office.Lens"
         "Microsoft.Office.Sway"
         "Microsoft.OneConnect"
         "Microsoft.People"
         "Microsoft.Print3D"
         "Microsoft.SkypeApp"
-        "Microsoft.StorePurchaseApp"
+        #"Microsoft.StorePurchaseApp"
         "Microsoft.Wallet"
         "Microsoft.Whiteboard"
-        "Microsoft.WindowsAlarms"
+        #"Microsoft.WindowsAlarms"
         "microsoft.windowscommunicationsapps"
         "Microsoft.WindowsFeedbackHub"
         "Microsoft.WindowsMaps"
-        "Microsoft.WindowsSoundRecorder"
+        #"Microsoft.WindowsSoundRecorder"
         "Microsoft.ZuneMusic"
         "Microsoft.ZuneVideo"
 
@@ -744,14 +744,14 @@ $Bloatware = @(
     }
             
     #Appends an underscore '_' to the Registry key for Edge
-    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
+    <#$Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
     If (Test-Path $Edge) {
         Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
     }
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
-})
+})#>
 
-$windowssearch.Add_Click({ 
+<#$windowssearch.Add_Click({ 
     Write-Host "Disabling Bing Search in Start Menu..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
@@ -765,7 +765,7 @@ $windowssearch.Add_Click({
     Write-Host "Hiding Taskbar Search icon / box..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
 	$wshell.Popup("Operation Completed",0,"Done",0x0)
-})
+})#>
 
 $backgroundapps.Add_Click({ 
     Write-Host "Disabling Background application access..."
@@ -802,7 +802,7 @@ $securitylow.Add_Click({
     Write-Host "Lowering UAC level..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
-    Write-Host "Disabling Windows Defender..."
+    <#Write-Host "Disabling Windows Defender..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force | Out-Null
 	}
@@ -811,15 +811,15 @@ $securitylow.Add_Click({
 		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "WindowsDefender" -ErrorAction SilentlyContinue
 	} ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
 		Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -ErrorAction SilentlyContinue
-	}
+	}#>
     Write-Host "Disabling Windows Defender Cloud..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Force | Out-Null
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Type DWord -Value 2
-    Write-Host "Disabling Meltdown (CVE-2017-5754) compatibility flag..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -ErrorAction SilentlyContinue
+    #Write-Host "Disabling Meltdown (CVE-2017-5754) compatibility flag..."
+	#Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -ErrorAction SilentlyContinue
     Write-Host "Disabling Malicious Software Removal Tool offering..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" | Out-Null
@@ -832,8 +832,8 @@ $securityhigh.Add_Click({
     Write-Host "Raising UAC level..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 5
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
-    Write-Host "Disabling SMB 1.0 protocol..."
-	Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
+    #Write-Host "Disabling SMB 1.0 protocol..."
+	#Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
     Write-Host "Enabling Windows Defender..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -ErrorAction SilentlyContinue
 	If ([System.Environment]::OSVersion.Version.Build -eq 14393) {
@@ -844,8 +844,8 @@ $securityhigh.Add_Click({
     Write-Host "Enabling Windows Defender Cloud..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -ErrorAction SilentlyContinue
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -ErrorAction SilentlyContinue
-    Write-Host "Disabling Windows Script Host..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Type DWord -Value 0
+    #Write-Host "Disabling Windows Script Host..."
+	#Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Type DWord -Value 0
     Write-Host "Enabling Meltdown (CVE-2017-5754) compatibility flag..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat")) {
 		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" | Out-Null
